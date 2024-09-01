@@ -33,7 +33,7 @@ class NotificationManager {
         content.title = "Stopwatch"
         content.body = "Current time: \(timeString)"
         content.sound = .default
-        content.categoryIdentifier = "SUBSEQUENT_NOTIFICATION_CATEGORY"
+        content.categoryIdentifier = "STOPWATCH_CATEGORY"
         return content
     }
     
@@ -73,4 +73,26 @@ class NotificationManager {
         content.sound = .default
         return content
     }
+    
+    func setupNotificationActions() {
+          
+        let pauseAction = UNNotificationAction(identifier: "PAUSE_ACTION",
+                                               title: "Pause",
+                                               options: [.authenticationRequired])
+        
+        let resumeAction = UNNotificationAction(identifier: "RESUME_ACTION",
+                                                title: "Resume",
+                                                options: [.authenticationRequired])
+        
+        let resetAction = UNNotificationAction(identifier: "RESET_ACTION",
+                                                title: "Reset",
+                                                options: [.authenticationRequired])
+        
+        let category = UNNotificationCategory(identifier: "STOPWATCH_CATEGORY",
+                                              actions: [pauseAction, resumeAction, resetAction],
+                                                intentIdentifiers: [],
+                                                options: [])
+          
+          UNUserNotificationCenter.current().setNotificationCategories([category])
+      }
 }
