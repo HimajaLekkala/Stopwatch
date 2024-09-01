@@ -14,7 +14,8 @@ class NotificationManager {
         }
     }
     
-    func scheduleNotification(timeString: String) {
+    func scheduleNotification(timeString: String, isTimeRunning: Bool) {
+        self.setupNotificationActions(isTimeRunning: isTimeRunning)
         let content = self.createContent(timeString: timeString)
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(identifier: "BACKGROUND_STOPWATCH_NOTIFICATION", content: content, trigger: trigger)
@@ -74,25 +75,41 @@ class NotificationManager {
         return content
     }
     
-    func setupNotificationActions() {
-          
-        let pauseAction = UNNotificationAction(identifier: "PAUSE_ACTION",
+    func setupNotificationActions(isTimeRunning: Bool) {
+        let pauseAction: UNNotificationAction?
+        let resumeAction: UNNotificationAction?
+        
+        if isTimeRunning {
+            resumeAction = nil
+            pauseAction = UNNotificationAction(identifier: "PAUSE_ACTION",
                                                title: "Pause",
                                                options: [.authenticationRequired])
-        
-        let resumeAction = UNNotificationAction(identifier: "RESUME_ACTION",
+        } else {
+            pauseAction = nil
+            resumeAction = UNNotificationAction(identifier: "RESUME_ACTION",
                                                 title: "Resume",
                                                 options: [.authenticationRequired])
+        }
         
         let resetAction = UNNotificationAction(identifier: "RESET_ACTION",
-                                                title: "Reset",
-                                                options: [.authenticationRequired])
+                                               title: "Reset",
+                                               options: [.authenticationRequired])
+        
+        var actions: [UNNotificationAction] = [resetAction]
+        
+        if let pause = pauseAction {
+            actions.append(pause)
+        }
+        
+        if let resume = resumeAction {
+            actions.append(resume)
+        }
         
         let category = UNNotificationCategory(identifier: "STOPWATCH_CATEGORY",
-                                              actions: [pauseAction, resumeAction, resetAction],
-                                                intentIdentifiers: [],
-                                                options: [])
-          
-          UNUserNotificationCenter.current().setNotificationCategories([category])
+                                              actions: actions,
+                                              intentIdentifiers: [],
+                                              options: [])
+        
+        UNUserNotificationCenter.current().setNotificationCategories([category])
       }
 }

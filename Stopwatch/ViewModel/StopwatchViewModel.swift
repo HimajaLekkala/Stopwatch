@@ -100,7 +100,7 @@ extension StopwatchViewModel {
         self.backgroundTrackingTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
             self?.checkBackgroundTime()
         }
-        self.notificationmanager.scheduleNotification(timeString: timeString)
+        self.notificationmanager.scheduleNotification(timeString: timeString, isTimeRunning: self.isTimeRunning)
     }
     
     func appWillEnterForeground() {

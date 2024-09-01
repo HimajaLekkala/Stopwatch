@@ -10,7 +10,6 @@ struct StopwatchApp: App {
     init() {
         self.viewModel = StopwatchViewModel(notificationManager: notificationManager)
         self.notificationManager.requestNotificationPermission()
-        self.notificationManager.setupNotificationActions()
         AppDelegate.stopwatchViewModel = self.viewModel
     }
     
