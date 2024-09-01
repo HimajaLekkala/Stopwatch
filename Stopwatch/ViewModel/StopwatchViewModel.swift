@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 enum StopwatchToggleType: String, CaseIterable, Identifiable {
     case seconds = "Seconds"
@@ -87,5 +88,15 @@ class StopwatchViewModel: ObservableObject {
         self.timeString = selectedStopwatchToggle.timeFormat
         self.startTime = nil
         self.isTimeRunning = false
+    }
+}
+
+extension StopwatchViewModel {
+    func appDidEnterBackground() {
+        notificationmanager.scheduleNotification(timeString: timeString)
+    }
+    
+    func appWillEnterForeground() {
+        notificationmanager.removeAllNotifications()
     }
 }

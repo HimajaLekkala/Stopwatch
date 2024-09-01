@@ -63,7 +63,22 @@ struct StopwatchView: View {
             .onChange(of: viewModel.selectedStopwatchToggle) { newValue in
                 viewModel.resetTimer()
             }
+            .onAppear {
+                NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { _ in
+                    viewModel.appDidEnterBackground()
+                }
+                
+                NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { _ in
+                    viewModel.appWillEnterForeground()
+                }
+            }
+            .onDisappear {
+                NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
+                
+                NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
+            }
         }
+        
     }
 }
 
