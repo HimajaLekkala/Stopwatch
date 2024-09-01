@@ -8,18 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		8A3E52092C82F75F009CC944 /* StopwatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3E52082C82F75F009CC944 /* StopwatchApp.swift */; };
-		8A3E520B2C82F75F009CC944 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3E520A2C82F75F009CC944 /* ContentView.swift */; };
+		8A3E520B2C82F75F009CC944 /* StopwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3E520A2C82F75F009CC944 /* StopwatchView.swift */; };
 		8A3E520D2C82F760009CC944 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A3E520C2C82F760009CC944 /* Assets.xcassets */; };
 		8A3E52112C82F760009CC944 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A3E52102C82F760009CC944 /* Preview Assets.xcassets */; };
+		8A3E521C2C831466009CC944 /* StopwatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3E521B2C831466009CC944 /* StopwatchViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8A3E52052C82F75F009CC944 /* Stopwatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stopwatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A3E52082C82F75F009CC944 /* StopwatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchApp.swift; sourceTree = "<group>"; };
-		8A3E520A2C82F75F009CC944 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8A3E520A2C82F75F009CC944 /* StopwatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchView.swift; sourceTree = "<group>"; };
 		8A3E520C2C82F760009CC944 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A3E520E2C82F760009CC944 /* Stopwatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Stopwatch.entitlements; sourceTree = "<group>"; };
 		8A3E52102C82F760009CC944 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8A3E521B2C831466009CC944 /* StopwatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +54,9 @@
 		8A3E52072C82F75F009CC944 /* Stopwatch */ = {
 			isa = PBXGroup;
 			children = (
+				8A3E521A2C83144F009CC944 /* ViewModel */,
+				8A3E52192C831448009CC944 /* View */,
 				8A3E52082C82F75F009CC944 /* StopwatchApp.swift */,
-				8A3E520A2C82F75F009CC944 /* ContentView.swift */,
 				8A3E520C2C82F760009CC944 /* Assets.xcassets */,
 				8A3E520E2C82F760009CC944 /* Stopwatch.entitlements */,
 				8A3E520F2C82F760009CC944 /* Preview Content */,
@@ -67,6 +70,22 @@
 				8A3E52102C82F760009CC944 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8A3E52192C831448009CC944 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8A3E520A2C82F75F009CC944 /* StopwatchView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8A3E521A2C83144F009CC944 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8A3E521B2C831466009CC944 /* StopwatchViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +158,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A3E520B2C82F75F009CC944 /* ContentView.swift in Sources */,
+				8A3E521C2C831466009CC944 /* StopwatchViewModel.swift in Sources */,
+				8A3E520B2C82F75F009CC944 /* StopwatchView.swift in Sources */,
 				8A3E52092C82F75F009CC944 /* StopwatchApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,7 +302,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
@@ -290,7 +310,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tumnoc.Stopwatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -318,7 +339,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
@@ -326,7 +347,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tumnoc.Stopwatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
