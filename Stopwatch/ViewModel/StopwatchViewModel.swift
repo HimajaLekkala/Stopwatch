@@ -45,6 +45,8 @@ class StopwatchViewModel: ObservableObject {
     private var startTime: Date?
     var elapsedTime: TimeInterval = 0
     var notificationmanager: NotificationManager
+    private var backgroundStartDate: Date?
+    private var backgroundTrackingTimer: Timer?
     
     init(notificationManager: NotificationManager) {
         self.notificationmanager = notificationManager
@@ -93,10 +95,26 @@ class StopwatchViewModel: ObservableObject {
 
 extension StopwatchViewModel {
     func appDidEnterBackground() {
-        notificationmanager.scheduleNotification(timeString: timeString)
+        self.backgroundStartDate = Date()
+        self.backgroundTrackingTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
+            self?.checkBackgroundTime()
+        }
+        self.notificationmanager.scheduleNotification(timeString: timeString)
     }
     
     func appWillEnterForeground() {
-        notificationmanager.removeAllNotifications()
+        self.notificationmanager.removeAllNotifications()
+    }
+    
+    private func checkBackgroundTime() {
+        guard let startDate = backgroundStartDate else { return }
+        let elapsedTime = Date().timeIntervalSince(startDate)
+        
+        if elapsedTime >= 900 {
+            self.resetTimer()
+            self.notificationmanager.scheduleStopwatchStoppedNotification()
+        } else if elapsedTime >= 600 {
+            notificationmanager.scheduleBackgroundWarningNotification()
+        }
     }
 }

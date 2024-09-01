@@ -15,7 +15,7 @@ class NotificationManager {
     }
     
     func scheduleNotification(timeString: String) {
-        let content = createContent(timeString: timeString)
+        let content = self.createContent(timeString: timeString)
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(identifier: "BACKGROUND_STOPWATCH_NOTIFICATION", content: content, trigger: trigger)
         
@@ -40,5 +40,37 @@ class NotificationManager {
     func removeAllNotifications() {
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
+    
+    func scheduleBackgroundWarningNotification() {
+        let content = createNotificationContent(title: "Reminder", body: "The app has been in the background for 10 minutes. It will be dismissed soon.")
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        let request = UNNotificationRequest(identifier: "BACKGROUND_WARNING_NOTIFICATION", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error scheduling background warning notification: \(error)")
+            }
+        }
+    }
+    
+    func scheduleStopwatchStoppedNotification() {
+        let content = createNotificationContent(title: "Stopwatch Timer Stopped", body: "The stopwatch timer has been stopped as the app was in the background for 15 minutes.")
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(identifier: "STOPWATCH_TIMER_STOPPED_NOTIFICATION", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error scheduling stopwatch stopped notification: \(error)")
+            }
+        }
+    }
+    
+    private func createNotificationContent(title: String, body: String) -> UNMutableNotificationContent {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = .default
+        return content
     }
 }
