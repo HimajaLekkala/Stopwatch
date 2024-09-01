@@ -43,6 +43,11 @@ class StopwatchViewModel: ObservableObject {
     private var timer: Timer?
     private var startTime: Date?
     var elapsedTime: TimeInterval = 0
+    var notificationmanager: NotificationManager
+    
+    init(notificationManager: NotificationManager) {
+        self.notificationmanager = notificationManager
+    }
     
     func startTimer() {
         guard timer == nil else { return }
