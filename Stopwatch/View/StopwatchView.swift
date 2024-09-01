@@ -71,11 +71,17 @@ struct StopwatchView: View {
                 NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { _ in
                     viewModel.appWillEnterForeground()
                 }
+                
+                NotificationCenter.default.addObserver(forName: UIApplication.willTerminateNotification, object: nil, queue: .main) { _ in
+                    viewModel.appWillTerminate()
+                }
             }
             .onDisappear {
                 NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
                 
                 NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
+                
+                NotificationCenter.default.removeObserver(self, name: UIApplication.willTerminateNotification, object: nil)
             }
         }
         

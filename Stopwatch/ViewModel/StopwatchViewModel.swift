@@ -95,6 +95,7 @@ class StopwatchViewModel: ObservableObject {
 
 extension StopwatchViewModel {
     func appDidEnterBackground() {
+        guard self.timeString != self.selectedStopwatchToggle.timeFormat else { return }
         self.backgroundStartDate = Date()
         self.backgroundTrackingTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
             self?.checkBackgroundTime()
@@ -103,6 +104,10 @@ extension StopwatchViewModel {
     }
     
     func appWillEnterForeground() {
+        self.notificationmanager.removeAllNotifications()
+    }
+    
+    func appWillTerminate() {
         self.notificationmanager.removeAllNotifications()
     }
     
